@@ -1,5 +1,18 @@
+/*
+A function that returns an ASCII truth table. Dots represent true, nothing represents false.
+
+EXAMPLES
+truthTable(['Q->R','P->Q','PvT','T->S','~R'],'S');
+truthTable(['T->Q','~TvR','~R'],'~Q');
+truthTable(['~(PvQ)','PvR','T->R'],'T');
+*/
+
 function truthTable(premises,conclusion) {
-  premises=premises.map(a=>a.replace(/[\s]/g,'').replace(/-*>/g,'→').replace(/<-*>/g,'↔').replace(/&/g,'^').replace(/~/g,'¬'));
+  function makePerfect(molecular) {
+    return molecular.replace(/[\s]/g,'').replace(/-*>/g,'→').replace(/<-*>/g,'↔').replace(/&/g,'^').replace(/~/g,'¬');
+  }
+  premises=premises.map(a=>makePerfect(a));
+  conclusion=makePerfect(conclusion);
   var atomics='';
   for (var atomic of premises.join('').replace(/[^A-Z]/g,'')) if (!~atomics.indexOf(atomic)) atomics+=atomic;
   function isTrue(molecular,atomics) {
@@ -50,7 +63,41 @@ function truthTable(premises,conclusion) {
     }
     return operations[0].arg1;
   }
-  var table=`${atomics.split('').join('|')}| ${premises.join(' | ')} || ${conclusion}`;
-  console.log(table);
+  var table='',tablelengths=[],div='';
+  var i=0;
+  for (var col of [...atomics.split(''),...premises,conclusion]) {
+    tablelengths+=col.length;
+    if (i===atomics.length+premises.length) table+='║',div+='╫';
+    else if (i!==0) table+='┃',div+='╋';
+    table+=col,div+='━'.repeat(col.length);
+    i++;
+  }
+  table+='\n'+div;
+  var combos=Math.pow(2,atomics.length),trues=[];
+  for (var i=0;i<combos;i++) trues.push({});
+  for (var i=0;i<atomics.length;i++) {
+    var t=combos/Math.pow(2,i+1);
+    for (var j=0,mode=false;j<combos;j++) {
+      if (j%t===0) mode=!mode;
+      trues[j][atomics[i]]=mode;
+    }
+  }
+  for (var i=0;i<combos;i++) {
+    var col=0,row='\n',results=[],conclu;
+    for (var atomic of atomics) {
+      row+=(trues[i][atomic]?'·':' ')+'┃';
+      col++;
+    }
+    for (var premise of premises) {
+      results.splice(0,0,isTrue(premise,trues[i]));
+      row+=(results[0]?'•':' ')+' '.repeat(tablelengths[col]-1)+'┃';
+      col++;
+    }
+    conclu=isTrue(conclusion,trues[i]);
+    row=row.slice(0,-1)+'║'+(conclu?'·':'');
+    if (~results.indexOf(false)) row=row.replace(/•/g,'·');
+    else row+=(conclu?' ✔':'  ✖');
+    table+=row;
+  }
+  return table;
 }
-truthTable(['A->B','C','C^BvA'],'B');
