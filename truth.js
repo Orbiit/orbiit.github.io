@@ -9,12 +9,12 @@ truthTable(['~(PvQ)','PvR','T->R'],'T');
 
 function truthTable(premises,conclusion) {
   function makePerfect(molecular) {
-    return molecular.replace(/[\s]/g,'').replace(/-*>/g,'→').replace(/<-*>/g,'↔').replace(/&/g,'^').replace(/~/g,'¬');
+    return molecular.replace(/[\s]/g,'').replace(/<-*>/g,'↔').replace(/-*>/g,'→').replace(/&/g,'^').replace(/~/g,'¬');
   }
   premises=premises.map(a=>makePerfect(a));
   conclusion=makePerfect(conclusion);
   var atomics='';
-  for (var atomic of premises.join('').replace(/[^A-Z]/g,'')) if (!~atomics.indexOf(atomic)) atomics+=atomic;
+  for (var atomic of (premises.join('')+conclusion).replace(/[^A-Z]/g,'')) if (!~atomics.indexOf(atomic)) atomics+=atomic;
   function isTrue(molecular,atomics) {
     function addTruth(op,dep,val) {
       if (operations.length&&op.depth===dep) {
