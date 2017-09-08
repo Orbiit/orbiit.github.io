@@ -24,14 +24,13 @@
     <p id="bleh"></p>
     <script>
 var p=document.querySelector("#bleh"),
-countries="China, Belgium, Spur Republic, Taiwan, Mexico, New England, North Korea, India, Madagascar, Brazil, Antarctica".split(', '),
-regions=  [1,     0,       0,             1,      0,      0,           1,           0,     0,          0,      0],
-hurricanes=["hurricane","typhoon"],
+countries="China; Belgium; New Mexico, Spur Republic; Arizona, Spur Republic; Texas, Spur Republic; Colorado, Spur Republic; California, Spur Republic; Utah, Spur Republic; Nevada, Spur Republic; Los Taipeis, Mexico; Taiwan City-state, Mexico; Uno, Mexico; Dos, Mexico; Tres, Mexico; Cuatro, Mexico; Seis, Mexico; Siete, Mexico; Maine, New England; Massachusetts, New England; Vermont, New England; New York, New England; New Hampsire, New England; New Jersey, New England; Rhode Island, New England; Pennsylvania, New England; District of Colombia, New England; Delaware, New England; Maryland, New England; Connecticut, New England; Area 51, North Korea; Area 52, North Korea; The Nonagon, North Korea; Russia, North Korea; Korea, North Korea; Distrito Cero, North Korea; Distrito Uno, North Korea; Distrito Dos, North Korea; Distrito Tres, North Korea; Distrito Cuatro, North Korea; Distrito Cinco, North Korea; Distrito Seis, North Korea; Distrito Siete, North Korea; Distrito Ocho, North Korea; Distrito Nueve, North Korea; Seanabad, India; Alexadesh, India; Stevenahji, India; Henrighaht, India; Miclipsamad, India; Madagascar; Steveñcia, Brazil; Hénri, Brazil; Elpansa, Brazil; Enseañe, Brazil; Alekiaquí, Brazil; Antarctica".split('; '),
+typhoons="China, Taiwan, North Korea".split(', '),
 disasters="earthquake, blizzard, flood, heat wave, sandstorm, drought, tornado, wildfire, tsunami, hail storm, plague".split(', '),
 s='';
 for (var c of countries) {
-  if (Math.floor(Math.random()*3)===0) {
-    if (Math.floor(Math.random()*3)===0) {
+  if (Math.floor(Math.random()*10)===0) {
+    if (Math.floor(Math.random()*disasters.length)===0) {
       s+=`${c} is being hit by a ${hurricanes[regions[countries.indexOf(c)]]}.\n`;
     } else s+=`${c} is being hit by a ${disasters[Math.floor(Math.random()*disasters.length)]}.\n`;
   } else s+=`There are no natural disasters in ${c} today. Yay!\n`;
