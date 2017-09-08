@@ -17,6 +17,9 @@
       p {
         white-space: pre-wrap;
       }
+      span.red {
+        color: red;
+      }
     </style>
   </head>
   <body>
@@ -31,9 +34,9 @@ s='';
 for (var c of countries) {
   if (Math.floor(Math.random()*10)===0) {
     if (Math.floor(Math.random()*disasters.length)===0) {
-      s+=`${c} is being hit by a ${hurricanes[regions[countries.indexOf(c)]]}.\n`;
-    } else s+=`${c} is being hit by a ${disasters[Math.floor(Math.random()*disasters.length)]}.\n`;
-  } else s+=`There are no natural disasters in ${c} today. Yay!\n`;
+      s+=`<strong>${c}</strong> is being hit by a <span class="red">${hurricanes[regions[countries.indexOf(c)]]}</span>.\n`;
+    } else s+=`<strong>${c}</strong> is being hit by a <span class="red">${disasters[Math.floor(Math.random()*disasters.length)]}</span>.\n`;
+  } else s+=`There are no natural disasters in <strong>${c}</strong> today. Yay!\n`;
 }
 p.textContent=s;
     </script>
