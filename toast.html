@@ -34,11 +34,11 @@ s='';
 for (var c of countries) {
   if (Math.floor(Math.random()*10)===0) {
     if (Math.floor(Math.random()*disasters.length)===0) {
-      s+=`<strong>${c}</strong> is being hit by a <span class="red">${hurricanes[regions[countries.indexOf(c)]]}</span>.\n`;
+      s+=`<strong>${c}</strong> is being hit by a <span class="red">${hurricanes[regions[countries.indexOf(c)]]}</span>.<br>`;
     } else s+=`<strong>${c}</strong> is being hit by a <span class="red">${disasters[Math.floor(Math.random()*disasters.length)]}</span>.\n`;
-  } else s+=`There are no natural disasters in <strong>${c}</strong> today. Yay!\n`;
+  } else s+=`There are no natural disasters in <strong>${c}</strong> today. Yay!<br>`;
 }
-p.textContent=s;
+p.innerHTML=s;
     </script>
   </body>
 </html>
