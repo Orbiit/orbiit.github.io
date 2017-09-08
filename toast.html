@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>test page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <style>
+      body {
+        max-width: 1000px;
+        margin: 20px auto;
+        padding: 0 20px;
+        font-family: sans-serif;
+      }
+      input, button, select, textarea {
+        font: inherit;
+      }
+      p {
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Toast Countries Natural Disasters Generator</h1>
+    <p id="bleh"></p>
+    <script>
+var p=document.querySelector("#bleh"),
+countries="China, Belgium, Spur Republic, Taiwan, Mexico, New England, North Korea, India, Madagascar, Brazil, Antarctica".split(', '),
+regions=  [1,     0,       0,             1,      0,      0,           1,           0,     0,          0,      0],
+hurricanes=["hurricane","typhoon"],
+disasters="earthquake, blizzard, flood, heat wave, sandstorm, drought, tornado, wildfire, tsunami, hail storm, plague".split(', '),
+s='';
+for (var c of countries) {
+  if (Math.floor(Math.random()*3)===0) {
+    if (Math.floor(Math.random()*3)===0) {
+      s+=`${c} is being hit by a ${hurricanes[regions[countries.indexOf(c)]]}.\n`;
+    } else s+=`${c} is being hit by a ${disasters[Math.floor(Math.random()*disasters.length)]}.\n`;
+  } else s+=`There are no natural disasters in ${c} today. Yay!\n`;
+}
+p.textContent=s;
+    </script>
+  </body>
+</html>
