@@ -150,8 +150,8 @@ function randomValue(random,obj) {
     stops.push(sum);
     corres.push(a);
   }
-  if (sum!==100) return sum-100;
   var num=Math.floor(random.nextFloat()*100);
+  if (sum!==100) return sum-100;
   for (var i=0;i<stops.length;i++) {
     if (num<stops[i]) return corres[i];
   }
