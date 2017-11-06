@@ -42,9 +42,9 @@ var regions={
     wind:{noWind:0,breeze:0,windy:0,veryWindy:0,extremelyWindy:0},
     clouds:{noClouds:0,someClouds:0,cloudyDay:0,lightRain:0,heavyRain:0,storm:0,monsoon:0}
   },"South United States":{
-    temperature:{veryCold:0,cold:0,somewhatCold:0,roomTemperature:0,warm:0,hot:0,veryHot:0},
-    wind:{noWind:0,breeze:0,windy:0,veryWindy:0,extremelyWindy:0},
-    clouds:{noClouds:0,someClouds:0,cloudyDay:0,lightRain:0,heavyRain:0,storm:0,monsoon:0}
+    temperature:{veryCold:0,cold:0,somewhatCold:0,roomTemperature:0,warm:55,hot:25,veryHot:20},
+    wind:{noWind:85,breeze:10,windy:5,veryWindy:0,extremelyWindy:0},
+    clouds:{noClouds:55,someClouds:25,cloudyDay:15,lightRain:1,heavyRain:2,storm:2,monsoon:0}
   },"Central America":{
     temperature:{veryCold:0,cold:0,somewhatCold:10,roomTemperature:20,warm:35,hot:25,veryHot:10},
     wind:{noWind:40,breeze:40,windy:15,veryWindy:4,extremelyWindy:1},
@@ -58,9 +58,9 @@ var regions={
     wind:{noWind:30,breeze:40,windy:20,veryWindy:10,extremelyWindy:0},
     clouds:{noClouds:10,someClouds:20,cloudyDay:50,lightRain:15,heavyRain:5,storm:0,monsoon:0}
   },"East Asia":{
-    temperature:{veryCold:0,cold:0,somewhatCold:0,roomTemperature:0,warm:0,hot:0,veryHot:0},
-    wind:{noWind:0,breeze:0,windy:0,veryWindy:0,extremelyWindy:0},
-    clouds:{noClouds:0,someClouds:0,cloudyDay:0,lightRain:0,heavyRain:0,storm:0,monsoon:0}
+    temperature:{veryCold:0,cold:0,somewhatCold:5,roomTemperature:20,warm:30,hot:35,veryHot:10},
+    wind:{noWind:10,breeze:20,windy:20,veryWindy:35,extremelyWindy:15},
+    clouds:{noClouds:5,someClouds:20,cloudyDay:25,lightRain:20,heavyRain:20,storm:10,monsoon:0}
   },"Southeast Asia":{
     temperature:{veryCold:0,cold:0,somewhatCold:0,roomTemperature:0,warm:0,hot:0,veryHot:0},
     wind:{noWind:0,breeze:0,windy:0,veryWindy:0,extremelyWindy:0},
@@ -86,17 +86,17 @@ var regions={
     wind:{noWind:40,breeze:20,windy:20,veryWindy:10,extremelyWindy:10},
     clouds:{noClouds:30,someClouds:30,cloudyDay:10,lightRain:10,heavyRain:10,storm:10,monsoon:0}
   },"Northern Africa":{
-    temperature:{veryCold:0,cold:0,somewhatCold:0,roomTemperature:0,warm:0,hot:0,veryHot:0},
-    wind:{noWind:0,breeze:0,windy:0,veryWindy:0,extremelyWindy:0},
-    clouds:{noClouds:0,someClouds:0,cloudyDay:0,lightRain:0,heavyRain:0,storm:0,monsoon:0}
+    temperature:{veryCold:0,cold:0,somewhatCold:0,roomTemperature:0,warm:10,hot:40,veryHot:50},
+    wind:{noWind:95,breeze:5,windy:0,veryWindy:0,extremelyWindy:0},
+    clouds:{noClouds:90,someClouds:10,cloudyDay:0,lightRain:0,heavyRain:0,storm:0,monsoon:0}
   },"Southern Africa":{
-    temperature:{veryCold:0,cold:0,somewhatCold:0,roomTemperature:0,warm:0,hot:0,veryHot:0},
-    wind:{noWind:0,breeze:0,windy:0,veryWindy:0,extremelyWindy:0},
-    clouds:{noClouds:0,someClouds:0,cloudyDay:0,lightRain:0,heavyRain:0,storm:0,monsoon:0}
+    temperature:{veryCold:0,cold:15,somewhatCold:20,roomTemperature:25,warm:20,hot:20,veryHot:0},
+    wind:{noWind:20,breeze:50,windy:30,veryWindy:0,extremelyWindy:0},
+    clouds:{noClouds:60,someClouds:20,cloudyDay:10,lightRain:10,heavyRain:0,storm:0,monsoon:0}
   },"Antarctica":{
-    temperature:{veryCold:0,cold:0,somewhatCold:0,roomTemperature:0,warm:0,hot:0,veryHot:0},
-    wind:{noWind:0,breeze:0,windy:0,veryWindy:0,extremelyWindy:0},
-    clouds:{noClouds:0,someClouds:0,cloudyDay:0,lightRain:0,heavyRain:0,storm:0,monsoon:0}
+    temperature:{veryCold:50,cold:40,somewhatCold:10,roomTemperature:0,warm:0,hot:0,veryHot:0},
+    wind:{noWind:20,breeze:60,windy:20,veryWindy:0,extremelyWindy:0},
+    clouds:{noClouds:50,someClouds:30,cloudyDay:10,lightRain:5,heavyRain:3,storm:2,monsoon:0}
   }
 },
 english={
@@ -131,13 +131,13 @@ function generateWeather(offset) {
   for (var region in regions) {
     output+='<h2>'+region+'</h2><p>';
     t=randomValue(random,regions[region].temperature);
-    if (typeof t==='number') output+='<span class="red">Sum of percent chances for TEMPERATURE is '+(t>0?t+'% too high':-t+'% too low')+'</span>; ';
+    if (typeof t==='number') output+='<span class="red">sum of percent chances for TEMPERATURE is '+(t>0?t+'% too high':-t+'% too low')+'</span>; ';
     else output+='temperature: <strong>'+english[t]+'</strong>; ';
     t=randomValue(random,regions[region].wind);
-    if (typeof t==='number') output+='<span class="red">Sum of percent chances for WIND is '+(t>0?t+'% too high':-t+'% too low')+'</span>; ';
+    if (typeof t==='number') output+='<span class="red">sum of percent chances for WIND is '+(t>0?t+'% too high':-t+'% too low')+'</span>; ';
     else output+='wind: <strong>'+english[t]+'</strong>; ';
     t=randomValue(random,regions[region].clouds);
-    if (typeof t==='number') output+='<span class="red">Sum of percent chances for CLOUDS is '+(t>0?t+'% too high':-t+'% too low')+'</span>';
+    if (typeof t==='number') output+='<span class="red">sum of percent chances for CLOUDS is '+(t>0?t+'% too high':-t+'% too low')+'</span>';
     else output+='clouds: <strong>'+english[t]+'</strong>';
     output+='</p>';
   }
