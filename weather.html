@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>yo weather</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <style>
+      body {
+        max-width: 1000px;
+        margin: 20px auto;
+        padding: 0 20px;
+        font-family: sans-serif;
+      }
+      input, button, select, textarea {
+        font: inherit;
+      }
+      p {
+        white-space: pre-wrap;
+      }
+      span.red {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Toast Countries Weather</h1>
+    <button id="hor" title="view weather for day before">&lt;&lt;&lt;</button>
+    <button id="mor" title="view weather for day after" disabled>&gt;&gt;&gt;</button>
+    <p id="bleh"></p>
+    <script>
+var regions={
+  "Arctic":{
+    temperature:{veryCold:50,cold:40,somewhatCold:10,roomTemperature:0,warm:0,hot:0,veryHot:0},
+    wind:{noWind:20,breeze:60,windy:20,veryWindy:0,extremelyWindy:0},
+    clouds:{noClouds:20,someClouds:20,cloudyDay:10,lightRain:30,heavyRain:15,storm:5,monsoon:0}
+  },"North United States":{
+    temperature:{veryCold:0,cold:0,somewhatCold:0,roomTemperature:0,warm:0,hot:0,veryHot:0},
+    wind:{noWind:0,breeze:0,windy:0,veryWindy:0,extremelyWindy:0},
+    clouds:{noClouds:0,someClouds:0,cloudyDay:0,lightRain:0,heavyRain:0,storm:0,monsoon:0}
+  },"Middle United States":{
+    temperature:{veryCold:0,cold:0,somewhatCold:0,roomTemperature:0,warm:0,hot:0,veryHot:0},
+    wind:{noWind:0,breeze:0,windy:0,veryWindy:0,extremelyWindy:0},
+    clouds:{noClouds:0,someClouds:0,cloudyDay:0,lightRain:0,heavyRain:0,storm:0,monsoon:0}
+  },"South United States":{
+    temperature:{veryCold:0,cold:0,somewhatCold:0,roomTemperature:0,warm:0,hot:0,veryHot:0},
+    wind:{noWind:0,breeze:0,windy:0,veryWindy:0,extremelyWindy:0},
+    clouds:{noClouds:0,someClouds:0,cloudyDay:0,lightRain:0,heavyRain:0,storm:0,monsoon:0}
+  },"Central America":{
+    temperature:{veryCold:0,cold:0,somewhatCold:10,roomTemperature:20,warm:35,hot:25,veryHot:10},
+    wind:{noWind:40,breeze:40,windy:15,veryWindy:4,extremelyWindy:1},
+    clouds:{noClouds:50,someClouds:10,cloudyDay:0,lightRain:20,heavyRain:15,storm:5,monsoon:0}
+  },"Southern America":{
+    temperature:{veryCold:0,cold:0,somewhatCold:0,roomTemperature:0,warm:0,hot:0,veryHot:0},
+    wind:{noWind:0,breeze:0,windy:0,veryWindy:0,extremelyWindy:0},
+    clouds:{noClouds:0,someClouds:0,cloudyDay:0,lightRain:0,heavyRain:0,storm:0,monsoon:0}
+  },"North Asia":{
+    temperature:{veryCold:10,cold:40,somewhatCold:30,roomTemperature:15,warm:5,hot:0,veryHot:0},
+    wind:{noWind:30,breeze:40,windy:20,veryWindy:10,extremelyWindy:0},
+    clouds:{noClouds:10,someClouds:20,cloudyDay:50,lightRain:15,heavyRain:5,storm:0,monsoon:0}
+  },"East Asia":{
+    temperature:{veryCold:0,cold:0,somewhatCold:0,roomTemperature:0,warm:0,hot:0,veryHot:0},
+    wind:{noWind:0,breeze:0,windy:0,veryWindy:0,extremelyWindy:0},
+    clouds:{noClouds:0,someClouds:0,cloudyDay:0,lightRain:0,heavyRain:0,storm:0,monsoon:0}
+  },"Southeast Asia":{
+    temperature:{veryCold:0,cold:0,somewhatCold:0,roomTemperature:0,warm:0,hot:0,veryHot:0},
+    wind:{noWind:0,breeze:0,windy:0,veryWindy:0,extremelyWindy:0},
+    clouds:{noClouds:0,someClouds:0,cloudyDay:0,lightRain:0,heavyRain:0,storm:0,monsoon:0}
+  },"Australia":{
+    temperature:{veryCold:0,cold:0,somewhatCold:0,roomTemperature:0,warm:0,hot:0,veryHot:0},
+    wind:{noWind:0,breeze:0,windy:0,veryWindy:0,extremelyWindy:0},
+    clouds:{noClouds:0,someClouds:0,cloudyDay:0,lightRain:0,heavyRain:0,storm:0,monsoon:0}
+  },"Middle East":{
+    temperature:{veryCold:1,cold:2,somewhatCold:3,roomTemperature:40,warm:35,hot:11,veryHot:8},
+    wind:{noWind:35,breeze:30,windy:20,veryWindy:10,extremelyWindy:5},
+    clouds:{noClouds:60,someClouds:20,cloudyDay:10,lightRain:7,heavyRain:2,storm:1,monsoon:0}
+  },"South Asia":{
+    temperature:{veryCold:1,cold:2,somewhatCold:5,roomTemperature:45,warm:35,hot:0,veryHot:12},
+    wind:{noWind:20,breeze:40,windy:20,veryWindy:5,extremelyWindy:5},
+    clouds:{noClouds:70,someClouds:10,cloudyDay:5,lightRain:5,heavyRain:0,storm:0,monsoon:5}
+  },"Northern Europe":{
+    temperature:{veryCold:10,cold:30,somewhatCold:20,roomTemperature:20,warm:10,hot:5,veryHot:5},
+    wind:{noWind:40,breeze:20,windy:20,veryWindy:10,extremelyWindy:10},
+    clouds:{noClouds:30,someClouds:30,cloudyDay:10,lightRain:10,heavyRain:10,storm:10,monsoon:0}
+  },"Southern Europe":{
+    temperature:{veryCold:10,cold:10,somewhatCold:20,roomTemperature:30,warm:20,hot:5,veryHot:5},
+    wind:{noWind:40,breeze:20,windy:20,veryWindy:10,extremelyWindy:10},
+    clouds:{noClouds:30,someClouds:30,cloudyDay:10,lightRain:10,heavyRain:10,storm:10,monsoon:0}
+  },"Northern Africa":{
+    temperature:{veryCold:0,cold:0,somewhatCold:0,roomTemperature:0,warm:0,hot:0,veryHot:0},
+    wind:{noWind:0,breeze:0,windy:0,veryWindy:0,extremelyWindy:0},
+    clouds:{noClouds:0,someClouds:0,cloudyDay:0,lightRain:0,heavyRain:0,storm:0,monsoon:0}
+  },"Southern Africa":{
+    temperature:{veryCold:0,cold:0,somewhatCold:0,roomTemperature:0,warm:0,hot:0,veryHot:0},
+    wind:{noWind:0,breeze:0,windy:0,veryWindy:0,extremelyWindy:0},
+    clouds:{noClouds:0,someClouds:0,cloudyDay:0,lightRain:0,heavyRain:0,storm:0,monsoon:0}
+  },"Antarctica":{
+    temperature:{veryCold:0,cold:0,somewhatCold:0,roomTemperature:0,warm:0,hot:0,veryHot:0},
+    wind:{noWind:0,breeze:0,windy:0,veryWindy:0,extremelyWindy:0},
+    clouds:{noClouds:0,someClouds:0,cloudyDay:0,lightRain:0,heavyRain:0,storm:0,monsoon:0}
+  }
+},
+english={
+  veryCold:"very cold",
+  cold:"cold",
+  somewhatCold:'somewhat cold',
+  roomTemperature:'room temperature',
+  warm:'warm',hot:'hot',veryHot:'very hot',
+  noWind:'no wind',breeze:'breeze',windy:'windy',veryWindy:'very windy',extremelyWindy:'extremelyWindy',
+  noClouds:'no clouds',someClouds:'some clouds',cloudyDay:'cloudy day',lightRain:'light rain/snow',heavyRain:'heavy rain/snow',
+  storm:'storm',monsoon:'monsoon'
+},
+months='January February March April May June July August September October November December'.split(' ');
+class Random {
+  constructor(seed) {
+    this._seed=seed%2147483647;
+    if (this._seed<=0) this._seed+=2147483646;
+  }
+  next() {
+    return this._seed=this._seed*16807%2147483647;
+  }
+  nextFloat() {
+    return (this.next()-1)/2147483646;
+  }
+}
+function generateWeather(offset) {
+  var day=new Date();
+  day=new Date(day.getFullYear(),day.getMonth(),day.getDate()+offset)
+  var random=new Random(day.getTime()),
+  output=`<p>Weather for ${months[day.getMonth()]} ${day.getDate()}, ${day.getFullYear()}</p>`,
+  t;
+  for (var region in regions) {
+    output+='<h2>'+region+'</h2><p>';
+    t=randomValue(random,regions[region].temperature);
+    if (typeof t==='number') output+='<span class="red">Sum of percent chances for TEMPERATURE is '+(t>0?t+'% too high':-t+'% too low')+'</span>; ';
+    else output+='temperature: <strong>'+english[t]+'</strong>; ';
+    t=randomValue(random,regions[region].wind);
+    if (typeof t==='number') output+='<span class="red">Sum of percent chances for WIND is '+(t>0?t+'% too high':-t+'% too low')+'</span>; ';
+    else output+='wind: <strong>'+english[t]+'</strong>; ';
+    t=randomValue(random,regions[region].clouds);
+    if (typeof t==='number') output+='<span class="red">Sum of percent chances for CLOUDS is '+(t>0?t+'% too high':-t+'% too low')+'</span>';
+    else output+='clouds: <strong>'+english[t]+'</strong>';
+    output+='</p>';
+  }
+  return output;
+}
+function randomValue(random,obj) {
+  var sum=0,stops=[],corres=[];
+  for (var a in obj) {
+    sum+=obj[a];
+    stops.push(sum);
+    corres.push(a);
+  }
+  if (sum!==100) return sum-100;
+  var num=Math.floor(random.nextFloat()*100);
+  for (var i=0;i<stops.length;i++) {
+    if (num<stops[i]) return corres[i];
+  }
+  throw new Error("wat");
+}
+var boop=document.querySelector('#bleh'),
+offset=0;
+boop.innerHTML=generateWeather(0);
+document.querySelector('#hor').onclick=e=>{
+  offset--;
+  if (offset<0) document.querySelector('#mor').disabled=false;
+  boop.innerHTML=generateWeather(offset);
+};
+document.querySelector('#mor').onclick=e=>{
+  if (offset<0) offset++;
+  if (offset>=0) document.querySelector('#mor').disabled=true;
+  boop.innerHTML=generateWeather(offset);
+};
+    </script>
+  </body>
+</html>
