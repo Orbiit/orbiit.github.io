@@ -1,0 +1,55 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  font-size: 0;
+  background-image: linear-gradient(20deg, #00177a, #0053ad);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  text-align: center;
+  font-family: 'Titillium Web', sans-serif;
+}
+.logo {
+  width: 75vw;
+  max-width: 400px;
+  opacity: 0;
+  animation: light-up .7s .5s forwards;
+  font-size: 100px;
+  color: white;
+}
+@keyframes light-up {
+  from { opacity: 0; }
+  to { opacity: 0.8; }
+}
+.links {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.6);
+  opacity: 0;
+  animation: reveal .7s .5s forwards;
+}
+.links a {
+  color: #0095bd;
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
+  transition: border-bottom .2s;
+}
+.links a:hover {
+  border-bottom: 2px solid #0095bd;
+}
+@keyframes reveal {
+  from {
+    margin-top: -16px;
+    opacity: 0;
+  }
+  to {
+    margin-top: 16px;
+    opacity: 1;
+  }
+}
