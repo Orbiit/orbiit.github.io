@@ -34,13 +34,13 @@ body {
   opacity: 0;
   animation: reveal .7s .5s forwards;
 }
-.links a {
+a {
   color: #0095bd;
   text-decoration: none;
   border-bottom: 1px dotted rgba(255, 255, 255, 0.3);
   transition: border-bottom .2s;
 }
-.links a:hover {
+a:hover {
   border-bottom: 2px solid #0095bd;
 }
 @keyframes reveal {
@@ -52,4 +52,20 @@ body {
     margin-top: 16px;
     opacity: 1;
   }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: light-up .7s .5s forwards;
+}
+p {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.5);
+}
+.brighter-colour {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+::selection {
+  background-color: rgb(0, 12, 91, 0.4);
 }

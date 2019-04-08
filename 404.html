@@ -1,19 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>404 | Orbiit Github Pages</title>
+    <title>404 | Orbiit</title>
     <meta charset="UTF-8">
+    <meta name="description" content="Big problem!"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <style>
-      body {
-        max-width: 1000px;
-        margin: 20px auto;
-        padding: 0 20px;
-        font-family: sans-serif;
-      }
-    </style>
+    <meta name="theme-color" content="#003895">
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+    <link rel="stylesheet" href="/main.css">
   </head>
   <body>
-    find more things at <a href="https://github.com/Orbiit/">the Githubby place</a> (<strong>404</strong>)
+    <div class="wrapper fade-in">
+      <p id="doubt">Something is wrong with the URL.</p>
+      <p class="brighter-colour" id="url"></p>
+      <p><a href="/">Go home</a></p>
+    </div>
+    <script type="text/javascript">
+      var questions = [
+        'Does this seem right to you?',
+        'Are you sure you spelled this right?',
+        "This doesn't seem right.",
+        'Something feels wrong with this.',
+        "This place doesn't exist.",
+        'Does the URL have any extra weird characters?',
+        'This is definitely your fault.',
+        'Perhaps the page moved on?'
+      ];
+      document.getElementById('doubt').textContent = questions[Math.floor(Math.random() * questions.length)];
+      document.getElementById('url').textContent = window.location.pathname;
+    </script>
   </body>
 </html>
